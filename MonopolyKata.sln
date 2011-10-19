@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonopolyKata", "MonopolyKata\MonopolyKata.csproj", "{570214B2-28F9-4C89-AFD3-FBB028F4783B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonopolyKataTests", "MonopolyKataTests\MonopolyKataTests.csproj", "{9CD1279C-10C9-4CD4-B72C-39A891AE1B33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{8DA9261D-1044-4338-BE65-4F79D3E95FED}"
+	ProjectSection(SolutionItems) = preProject
+		lib\nunit.framework.dll = lib\nunit.framework.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{570214B2-28F9-4C89-AFD3-FBB028F4783B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{570214B2-28F9-4C89-AFD3-FBB028F4783B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{570214B2-28F9-4C89-AFD3-FBB028F4783B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{570214B2-28F9-4C89-AFD3-FBB028F4783B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CD1279C-10C9-4CD4-B72C-39A891AE1B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CD1279C-10C9-4CD4-B72C-39A891AE1B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CD1279C-10C9-4CD4-B72C-39A891AE1B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CD1279C-10C9-4CD4-B72C-39A891AE1B33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
