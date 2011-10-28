@@ -5,8 +5,13 @@ using System.Text;
 
 namespace MonopolyKata.Classes.Location
 {
-    public class Purchasable : LocationBase
+    public class Location : LocationBase
     {
+        public string Colour;
+
+        public int HousePurchasePrice;
+        public int HouseSellPrice;
+
         public int PurchasePrice;
         public int MortgagePrice;
         public int SellPrice;

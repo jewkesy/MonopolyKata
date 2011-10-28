@@ -1,22 +1,23 @@
-﻿namespace MonopolyKata.Classes.Location
+﻿using System.ComponentModel;
+
+namespace MonopolyKata.Classes.Location
 {
     public class LocationBase
     {
         public string Name;
-
-
+        public LocationType LocType;
 
         public enum LocationType
         {
             Go,
             Street,
             Jail,
-            FreeParking,
+            [DescriptionAttribute("Free Parking")]FreeParking,
             Station,
             Utility,
-            CommunityChest,
+            [DescriptionAttribute("Community Chest")]CommunityChest,
             Chance,
-            GoToJail
+            [DescriptionAttribute("Go To Jail")]GoToJail
         }
     }
 }
