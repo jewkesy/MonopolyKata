@@ -13,7 +13,7 @@ namespace MonopolyKataTests
         //As a player, I can take a turn so that I can move around the board.
 
         [Test]
-        public void TestThatAPlayerAtStartRolls7GoesToLocation7()
+        public void TestThatAPlayerAtGoRolls7GoesToLocation7()
         {
             
         }
