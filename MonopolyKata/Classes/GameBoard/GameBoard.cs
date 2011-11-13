@@ -9,6 +9,8 @@ namespace MonopolyKata.Classes.GameBoard
 
         public GameBoard()
         {
+            Locations = new List<Location.Location>();
+
             Locations.Add(new Location.Location { Name = "Go", LocType = LocationBase.LocationType.Go});
             Locations.Add(new Location.Location { Name = "Old Kent Road", TitleDeed = new TitleDeed{ Cost = 60, Rent = 2, OneHouse = 10, TwoHouses = 30, ThreeHouses = 90, FourHouses = 160, Hotel = 250, CosttoBuild = 50}, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Brown });
             Locations.Add(new Location.Location { Name = "Community Chest", LocType = LocationBase.LocationType.CommunityChest });
