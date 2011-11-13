@@ -7,6 +7,7 @@ namespace MonopolyKata.Classes.Location
         public string Name;
         public LocationType LocType;
         public bool Purchasable;
+        public LocationColour LocColour;
 
         public enum LocationType
         {
@@ -24,6 +25,7 @@ namespace MonopolyKata.Classes.Location
 
         public enum LocationColour
         {
+            Neutral=0,
             Brown,
             Blue,
             Pink,
