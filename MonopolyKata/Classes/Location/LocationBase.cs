@@ -6,6 +6,7 @@ namespace MonopolyKata.Classes.Location
     {
         public string Name;
         public LocationType LocType;
+        public bool Purchasable;
 
         public enum LocationType
         {
@@ -16,8 +17,22 @@ namespace MonopolyKata.Classes.Location
             Station,
             Utility,
             [DescriptionAttribute("Community Chest")]CommunityChest,
+            Tax,
             Chance,
             [DescriptionAttribute("Go To Jail")]GoToJail
+        }
+
+        public enum LocationColour
+        {
+            Brown,
+            Blue,
+            Pink,
+            Orange,
+            Red,
+            Yellow,
+            Green,
+            Purple
+
         }
     }
 }

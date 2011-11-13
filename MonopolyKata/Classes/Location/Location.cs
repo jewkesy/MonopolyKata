@@ -12,6 +12,9 @@ namespace MonopolyKata.Classes.Location
         public int HousePurchasePrice;
         public int HouseSellPrice;
 
+        public bool Purchased;
+
+        public int TaxPrice;
         public int PurchasePrice;
         public int MortgagePrice;
         public int SellPrice;
