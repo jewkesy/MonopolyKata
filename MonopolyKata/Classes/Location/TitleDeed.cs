@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace MonopolyKata.Classes.Location
+﻿namespace MonopolyKata.Classes.Location
 {
     public class TitleDeed
     {
@@ -18,7 +13,5 @@ namespace MonopolyKata.Classes.Location
         public int CostToBuild;
         public int CostToSell { get { return CostToBuild/2; } }
         public int MortageValue {get { return Cost/2; }}
-
-
     }
 }
