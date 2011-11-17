@@ -9,6 +9,18 @@ namespace MonopolyKataTests.Classes.GameBoardTests
         readonly GameBoard _gameBoard = new GameBoard();
 
         [Test]
+        public void TestThatTheGameBoardHas16CommunityChestCards()
+        {
+            Assert.That(_gameBoard.CommunityChestCards.Count, Is.EqualTo(16));
+        }
+
+        [Test]
+        public void TestThatTheGameBoardHas16ChanceCards()
+        {
+            Assert.That(_gameBoard.ChanceCards.Count, Is.EqualTo(16));
+        }
+
+        [Test]
         public void TestThatTheGameBoardHas40Squares()
         {
             Assert.That(_gameBoard.Locations.Count, Is.EqualTo(40));

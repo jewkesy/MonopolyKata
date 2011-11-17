@@ -6,10 +6,17 @@ namespace MonopolyKata.Classes.GameBoard
 {
     /// <summary>
     /// http://www.moonatnoon.com/puzzles/reference/monopoly.html
+    /// If one "Utility" is owned rent is 4 times amount shown on dice.
+    /// If both "Utilities" are owned rent is 10 times amount shown on dice.
+    /// 32 houses, 12 hotels, two six-sided dice
+    /// There are 16 each of Chance and Community Chest cards
+    /// If a player owns ALL the Lots of any Color-Group, the rent is Doubled on Unimproved Lots in that group.
     /// </summary>
     public class GameBoard
     {
         public IList<Location.Location> Locations;
+        public IList<Cards.CommunityChest> CommunityChestCards;
+        public IList<Cards.Chance> ChanceCards;
 
         public GameBoard()
         {
