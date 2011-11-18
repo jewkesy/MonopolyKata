@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using MonopolyKata.Classes.Cards;
 using MonopolyKata.Classes.Location;
 
-namespace MonopolyKata.Classes.GameBoard
+namespace MonopolyKata.Classes.GameBoard 
 {
     /// <summary>
     /// http://www.moonatnoon.com/puzzles/reference/monopoly.html
@@ -27,24 +28,31 @@ namespace MonopolyKata.Classes.GameBoard
 
         private void AssembleCommunityChestCards()
         {
+            CommunityChestCards = new List<CommunityChest>();
+
+            CommunityChestCards.Add(new CommunityChest { Title = "Advance to Go"});
+
+
             ShuffleCommunityChestCards();
-            throw new NotImplementedException();
         }
 
         private void AssembleChanceCards()
         {
+            ChanceCards = new List<Chance>();
+
+            ChanceCards.Add(new Chance { Title = "Advance to Go" });
+
             ShuffleChanceCards();
-            throw new NotImplementedException();
         }
 
         private void ShuffleCommunityChestCards()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void ShuffleChanceCards()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private void AssembleGameBoard()

@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,11 +47,14 @@
     <Compile Include="Classes\Cards\Chance.cs" />
     <Compile Include="Classes\Cards\CommunityChest.cs" />
     <Compile Include="Classes\GameBoard\GameBoard.cs" />
+    <Compile Include="Classes\Helpers\ShuffleCards.cs" />
+    <Compile Include="Classes\Helpers\ShuffleTests.cs" />
     <Compile Include="Classes\Location\Location.cs" />
     <Compile Include="Classes\Location\LocationBase.cs" />
     <Compile Include="Classes\Location\TitleDeed.cs" />
     <Compile Include="Classes\Players\PlayerTokens.cs" />
     <Compile Include="Interfaces\IDice.cs" />
+    <Compile Include="Interfaces\IGameBoard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ namespace MonopolyKata.Classes.Cards
     {
 //Pay School Tax $150
 //Your Xmas Fund Matures
-//        The "Second Prize in a Beauty Contest" was also changed in 1936 to an award of $10 from an award of $11.
+//The "Second Prize in a Beauty Contest" was also changed in 1936 to an award of $10 from an award of $11.
 //Cards in the U.S. Standard Edition (the "Atlantic City Edition") which do not appear in the UK Standard Edition:
 //Life Insurance Matures – collect $100
 //Pay School tax of $150
@@ -27,10 +27,8 @@ namespace MonopolyKata.Classes.Cards
 //Doctor's fees – Pay $50
 //Get out of jail free – this card may be kept until needed, or sold
 //Go to jail – go directly to jail – Do not pass Go, do not collect $200
-//It is your birthday Collect $10 from each player
 //Grand Opera Night – collect $50 from every player for opening night seats
 //Income Tax refund – collect $20
-//Life Insurance Matures – collect $100
 //Pay Hospital Fees of $100
 //Pay School Fees of $50
 //Receive $25 Consultancy Fee
