@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MonopolyKata.Classes.Cards;
 using MonopolyKata.Classes.Location;
+using MonopolyKata.Classes.Players;
 
 namespace MonopolyKata.Classes.GameBoard 
 {
@@ -12,12 +13,15 @@ namespace MonopolyKata.Classes.GameBoard
     /// 32 houses, 12 hotels, two six-sided dice
     /// There are 16 each of Chance and Community Chest cards
     /// If a player owns ALL the Lots of any Color-Group, the rent is Doubled on Unimproved Lots in that group.
+    /// Each player starts with £1500
     /// </summary>
     public class GameBoard
     {
         public IList<Location.Location> Locations;
         public IList<Cards.CommunityChest> CommunityChestCards;
         public IList<Cards.Chance> ChanceCards;
+        public IList<Players.Player> Players;
+        public Players.Player CurrentPlayer;
 
         public GameBoard()
         {
@@ -100,5 +104,21 @@ namespace MonopolyKata.Classes.GameBoard
             Locations.Add(new Location.Location { Name = "Super Tax", TaxPrice = 100, LocType = LocationBase.LocationType.Tax });
             Locations.Add(new Location.Location { Name = "Mayfair", TitleDeed = new TitleDeed { Cost = 400, Rent = 50, OneHouse = 200, TwoHouses = 600, ThreeHouses = 1400, FourHouses = 1700, Hotel = 2000, CostToBuild = 200 }, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Purple });
         }
+
+        public void MovePlayer(int playerIndex, int i, int i1)
+        {
+            int currLoc = Players[playerIndex].CurrentPosition;
+
+
+            int newLoc =  currLoc + i + i1;
+            if (newLoc > Locations.Count)
+            {
+                newLoc = newLoc - Locations.Count;
+            }
+
+            Players[playerIndex].CurrentPosition = newLoc;
+
+        }
+
     }
 }

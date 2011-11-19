@@ -2,6 +2,8 @@
 {
     public class PlayerTokens
     {
+        public Tokens Token;
+
         public enum Tokens
         {
             Battleship,

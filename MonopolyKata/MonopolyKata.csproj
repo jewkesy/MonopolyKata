@@ -52,6 +52,7 @@
     <Compile Include="Classes\Location\Location.cs" />
     <Compile Include="Classes\Location\LocationBase.cs" />
     <Compile Include="Classes\Location\TitleDeed.cs" />
+    <Compile Include="Classes\Players\Player.cs" />
     <Compile Include="Classes\Players\PlayerTokens.cs" />
     <Compile Include="Interfaces\IDice.cs" />
     <Compile Include="Interfaces\IGameBoard.cs" />
