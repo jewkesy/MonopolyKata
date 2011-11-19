@@ -26,11 +26,45 @@ namespace Monopoly
 
         private static void SetUpGamePlayers()
         {
+            int maxPlayers = Enum.GetValues(typeof (PlayerTokens.Tokens)).Length;
+            int humanPlayerCount;
+            int cpuPlayerCount;
+
             while (true) // Loop indefinitely
             {
+                Console.WriteLine("Enter numer of Human players [1 - " + maxPlayers + "]:");
+                string humans = Console.ReadLine();
+                if (string.IsNullOrEmpty(humans)) continue;
+
+                int output;
+                if (Int32.TryParse(humans, out output)) if (output < 0 || output > maxPlayers) continue; //supports zero for now
+
+                humanPlayerCount = output;
 
                 break;
             }
+
+            if (humanPlayerCount < maxPlayers)
+            {
+                while (true)
+                {
+                    Console.WriteLine("Enter numer of CPU players [0 - " + (maxPlayers - humanPlayerCount) + "]:");
+                    string cpus = Console.ReadLine();
+
+
+                    if (string.IsNullOrEmpty(cpus)) continue;
+
+                    int output;
+                    if (Int32.TryParse(cpus, out output))
+                        if (output < 0 || output > maxPlayers) continue; //supports zero for now
+
+                    cpuPlayerCount = output;
+
+                    break;
+                }
+            }
+            _game.Players[0].Token = PlayerTokens.Tokens.Battleship;
+            _game.CurrentPlayer = _game.Players[0];
         }
 
         private static void PlayGame()
@@ -40,15 +74,14 @@ namespace Monopoly
                 try
                 {
 
-
+                    Console.Write("[" + _game.CurrentPlayer.Token + "] ");
                     Console.WriteLine("Enter Die Values:"); // Prompt
                     string line = Console.ReadLine(); // Get string from user
-                    if (line == null) continue;
-                    if (line.ToLower() == "exit") break;
+                    if (string.IsNullOrEmpty(line)) continue;
+                    if (line.ToLower() == "exit" || line.ToLower() == "quit" || line.ToLower() == "e" || line.ToLower() == "q") break;
                     if (line.ToLower() == "help" || line == "?") ShowHelp();
                     if (line.ToLower() == "board" || line == "b") ShowBoard();
                     if (line.ToLower() == "bank" || line == "£") ShowBank();
-
 
                     if (line.Length != 2) continue;
 

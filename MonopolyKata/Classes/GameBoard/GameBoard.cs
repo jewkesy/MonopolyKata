@@ -18,10 +18,10 @@ namespace MonopolyKata.Classes.GameBoard
     public class GameBoard
     {
         public IList<Location.Location> Locations;
-        public IList<Cards.CommunityChest> CommunityChestCards;
-        public IList<Cards.Chance> ChanceCards;
-        public IList<Players.Player> Players;
-        public Players.Player CurrentPlayer;
+        public IList<CommunityChest> CommunityChestCards;
+        public IList<Chance> ChanceCards;
+        public IList<Player> Players;
+        public Player CurrentPlayer;
 
         public GameBoard()
         {
@@ -109,7 +109,6 @@ namespace MonopolyKata.Classes.GameBoard
         {
             int currLoc = Players[playerIndex].CurrentPosition;
 
-
             int newLoc =  currLoc + i + i1;
             if (newLoc > Locations.Count-1)
             {
@@ -117,8 +116,6 @@ namespace MonopolyKata.Classes.GameBoard
             }
 
             Players[playerIndex].CurrentPosition = newLoc;
-
         }
-
     }
 }
