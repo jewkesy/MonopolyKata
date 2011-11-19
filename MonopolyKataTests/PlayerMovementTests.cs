@@ -41,6 +41,14 @@ namespace MonopolyKataTests
         }
 
         [Test]
+        public void TestThatAPlayerAtLocation37Rolls3GoesToLocation0()
+        {
+            _gameBoard.Players[0].CurrentPosition = 37;
+            _gameBoard.MovePlayer(0, 1, 2);
+            Assert.That(_gameBoard.Players[0].CurrentPosition, Is.EqualTo(0));
+        }
+
+        [Test]
         public void TestThatRollingDoubleEnablesAnotherGoIfNotLandingInJail()
         {
             Player player2 = new Player{ Token = PlayerTokens.Tokens.Car};
