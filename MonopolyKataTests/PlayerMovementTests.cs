@@ -81,7 +81,7 @@ namespace MonopolyKataTests
         [Test]
         public void TestThatAPlayerInJailRollingDoubleReleasesPlayer()
         {
-            _gameBoard.Players[0].CurrentPosition = 20;
+            _gameBoard.Players[0].CurrentPosition = 10;
             _gameBoard.Players[0].InJail = true;
             _gameBoard.MovePlayer(0, 2, 2);
             Assert.That(_gameBoard.Players[0].CurrentPosition, Is.EqualTo(14));

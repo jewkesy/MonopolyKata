@@ -6,18 +6,18 @@
 
         public enum Tokens
         {
-            Battleship,
-            Hat,
-            Dog,
+            Battleship = 1,
+            Cannon,
             Car,
+            Dog,
+            Hat,
+            Horse,
             Iron,
+            MoneyBag,
             Shoe,
             Train,
             Thimble,
-            Cannon,
-            Wheebarrow,
-            MoneyBag,
-            Horse
+            Wheebarrow
         }
     }
 }

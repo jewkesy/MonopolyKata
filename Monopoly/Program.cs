@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MonopolyKata;
 using MonopolyKata.Classes.GameBoard;
 using MonopolyKata.Classes.Location;
 using MonopolyKata.Classes.Players;
-using MonopolyKata.Interfaces;
 
 namespace Monopoly
 {
@@ -16,7 +13,7 @@ namespace Monopoly
 
         static void Main(string[] args)
         {
-            _game.Players = new List<Player>{ new Player()};
+            _game.Players = new List<Player>();
 
             Console.WriteLine("Welcome to Monopoly DKJ Edition"); // Prompt
 
@@ -55,15 +52,37 @@ namespace Monopoly
                     if (string.IsNullOrEmpty(cpus)) continue;
 
                     int output;
-                    if (Int32.TryParse(cpus, out output))
-                        if (output < 0 || output > maxPlayers) continue; //supports zero for now
+                    if (Int32.TryParse(cpus, out output)) if (output < 0 || output > maxPlayers) continue; //supports zero for now
 
                     cpuPlayerCount = output;
 
                     break;
                 }
             }
-            _game.Players[0].Token = PlayerTokens.Tokens.Battleship;
+
+            for (int i = 1; i <= humanPlayerCount; i++ )
+            {
+                while (true)
+                {
+                    Console.WriteLine("Player " + i + ", please select your token:");
+                    string tokenIndx = Console.ReadLine();
+                    int output;
+                    if (Int32.TryParse(tokenIndx, out output)) 
+                        if (output < 0 || output > 12) continue;
+
+                    Player player = new Player{ Token = (PlayerTokens.Tokens) output};
+
+                    _game.Players.Add(player);
+                    break;
+                }
+            }
+
+           
+            foreach (Player player in _game.Players)
+            {
+                player.Money = 1500;
+            }
+
             _game.CurrentPlayer = _game.Players[0];
         }
 
@@ -73,8 +92,7 @@ namespace Monopoly
             {
                 try
                 {
-
-                    Console.Write("[" + _game.CurrentPlayer.Token + "] ");
+                    Console.Write("[" + _game.CurrentPlayer.Token + " - £" + _game.CurrentPlayer.Money + "] ");
                     Console.WriteLine("Enter Die Values:"); // Prompt
                     string line = Console.ReadLine(); // Get string from user
                     if (string.IsNullOrEmpty(line)) continue;
@@ -93,6 +111,8 @@ namespace Monopoly
                         _game.MovePlayer(0, die1, die2);
                         Console.Write("You landed on ");
                         Console.WriteLine(_game.Locations[_game.Players[0].CurrentPosition].Name);
+
+                        _game.NextPlayerTurn();
                     }
                 }
                 catch (Exception ex)

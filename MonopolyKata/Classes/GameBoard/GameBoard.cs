@@ -126,5 +126,30 @@ namespace MonopolyKata.Classes.GameBoard
 
 
         }
+
+        public void NextPlayerTurn()
+        {
+            Player prevPlayer = CurrentPlayer;
+
+            int counter = 0;
+
+            foreach (Player player in Players)
+            {
+                if (player.Token == prevPlayer.Token)
+                {
+                    counter++;
+                    if (counter == Players.Count)
+                    {
+                        CurrentPlayer = Players[0];
+                    }
+                    else
+                    {
+                        CurrentPlayer = Players[counter];
+                    }
+                    break;
+                }
+                counter++;
+            }
+        }
     }
 }

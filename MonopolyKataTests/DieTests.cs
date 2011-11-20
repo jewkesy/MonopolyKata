@@ -11,18 +11,21 @@ namespace MonopolyKataTests
     {
         
         [Test]
+        [Ignore]
         public void TestThatOnly2DieAreAllowed()
         {
             
         }
 
         [Test]
+        [Ignore]
         public void TestThatTheLowestPossibleTotalScoreIs2()
         {
             
         }
 
         [Test]
+        [Ignore]
         public void TestThatTheHighstPossibleTotalScoreIs12()
         {
             MonopolyKata.Interfaces.IDice mockedDice = MockRepository.GenerateMock<MonopolyKata.Interfaces.IDice>();
@@ -32,12 +35,14 @@ namespace MonopolyKataTests
         }
 
         [Test]
+        [Ignore]
         public void TestThatASingleDieCannotBeLowerThan1()
         {
 
         }
 
         [Test]
+        [Ignore]
         public void TestThatASingleDieCannotBeHigherThan6()
         {
 

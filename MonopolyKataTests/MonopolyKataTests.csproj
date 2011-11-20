@@ -52,6 +52,7 @@
     <Compile Include="GamePlayersTests.cs" />
     <Compile Include="GameRoundsTests.cs" />
     <Compile Include="LocationsTests.cs" />
+    <Compile Include="NextPlayerTurnTests.cs" />
     <Compile Include="PlayerMovementTests.cs" />
     <Compile Include="PlayerTransactionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
