@@ -109,21 +109,61 @@ namespace Monopoly
 
         private static void ShowBank()
         {
-            Console.Write("Name\t\t\t\t");
-            Console.Write("Purchased\t");
-            Console.WriteLine("Cost");
+            PrintLine();
+            PrintRow("Name", "Purchased", "Cost", "Colour");
+            PrintLine();
 
             foreach (Location location in _game.Locations.Where(location => location.Purchasable))
             {
-                Console.Write(location.Name + "\t\t\t");
-                Console.Write(location.Purchased + "\t");
-                Console.WriteLine("£" + location.TitleDeed.Cost);
+                PrintRow(location.Name, location.Purchased.ToString(), "£" + location.TitleDeed.Cost, location.LocColour.ToString());
             }
+
+            PrintLine();
         }
 
         private static void ShowHelp()
         {
             throw new NotImplementedException();
+        }
+
+        public static bool IsNumeric(string theValue)
+        {
+            try
+            {
+                Convert.ToInt32(theValue);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        static void PrintLine()
+        {
+            Console.WriteLine(new string('-', 57));
+        }
+
+        static void PrintRow(string column1, string column2, string column3, string column4)
+        {
+            Console.WriteLine(
+                string.Format("|{0}|{1}|{2}|{3}|",
+                    AlignCentre(column1, 26),
+                    AlignCentre(column2, 11),
+                    AlignCentre(column3, 6),
+                    AlignCentre(column4, 9)));
+        }
+
+        static string AlignCentre(string text, int width)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return new string(' ', width);
+            }
+            else
+            {
+                return text.PadRight(width - (width - text.Length) / 2).PadLeft(width);
+            }
         }
     }
 }

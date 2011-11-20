@@ -71,12 +71,12 @@ namespace MonopolyKata.Classes.GameBoard
             Locations.Add(new Location.Location { Name = "Kings Cross Station", Purchasable = true, TitleDeed = new TitleDeed { Cost = 200 }, LocType = LocationBase.LocationType.Station });
             Locations.Add(new Location.Location { Name = "The Angel Islington", Purchasable = true, TitleDeed = new TitleDeed { Cost = 100, Rent = 6, OneHouse = 30, TwoHouses = 90, ThreeHouses = 270, FourHouses = 400, Hotel = 550, CostToBuild = 50 }, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Blue });
             Locations.Add(new Location.Location { Name = "Chance", LocType = LocationBase.LocationType.Chance });
-            Locations.Add(new Location.Location { Name = "Euston Road, Purchasable = true", TitleDeed = new TitleDeed { Cost = 100, Rent = 6, OneHouse = 30, TwoHouses = 90, ThreeHouses = 270, FourHouses = 400, Hotel = 550, CostToBuild = 50 }, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Blue });
+            Locations.Add(new Location.Location { Name = "Euston Road", Purchasable = true, TitleDeed = new TitleDeed { Cost = 100, Rent = 6, OneHouse = 30, TwoHouses = 90, ThreeHouses = 270, FourHouses = 400, Hotel = 550, CostToBuild = 50 }, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Blue });
             Locations.Add(new Location.Location { Name = "Pentonville Road", Purchasable = true, TitleDeed = new TitleDeed { Cost = 120, Rent = 8, OneHouse = 40, TwoHouses = 100, ThreeHouses = 300, FourHouses = 450, Hotel = 600, CostToBuild = 50 }, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Blue });
             Locations.Add(new Location.Location { Name = "In Jail/Just Visiting", LocType = LocationBase.LocationType.Jail });
             Locations.Add(new Location.Location { Name = "Pall Mall", Purchasable = true, TitleDeed = new TitleDeed { Cost = 140, Rent = 10, OneHouse = 50, TwoHouses = 150, ThreeHouses = 450, FourHouses = 625, Hotel = 750, CostToBuild = 100 }, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Pink });
             Locations.Add(new Location.Location { Name = "Electric Company", Purchasable = true, TitleDeed = new TitleDeed { Cost = 150 }, LocType = LocationBase.LocationType.Utility });
-            Locations.Add(new Location.Location { Name = "Whitehall, Purchasable = true", TitleDeed = new TitleDeed { Cost = 140, Rent = 10, OneHouse = 50, TwoHouses = 150, ThreeHouses = 450, FourHouses = 625, Hotel = 750, CostToBuild = 100 }, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Pink });
+            Locations.Add(new Location.Location { Name = "Whitehall", Purchasable = true, TitleDeed = new TitleDeed { Cost = 140, Rent = 10, OneHouse = 50, TwoHouses = 150, ThreeHouses = 450, FourHouses = 625, Hotel = 750, CostToBuild = 100 }, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Pink });
             Locations.Add(new Location.Location { Name = "Northumberland Avenue", Purchasable = true, TitleDeed = new TitleDeed { Cost = 160, Rent = 12, OneHouse = 60, TwoHouses = 180, ThreeHouses = 500, FourHouses = 700, Hotel = 900, CostToBuild = 100 }, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Pink });
             Locations.Add(new Location.Location { Name = "Marylebone Station", Purchasable = true, TitleDeed = new TitleDeed { Cost = 200 }, LocType = LocationBase.LocationType.Station });
             Locations.Add(new Location.Location { Name = "Bow Street", Purchasable = true, TitleDeed = new TitleDeed { Cost = 180, Rent = 14, OneHouse = 70, TwoHouses = 200, ThreeHouses = 550, FourHouses = 750, Hotel = 950, CostToBuild = 100 }, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Orange });
@@ -110,12 +110,21 @@ namespace MonopolyKata.Classes.GameBoard
             int currLoc = Players[playerIndex].CurrentPosition;
 
             int newLoc =  currLoc + i + i1;
+
             if (newLoc > Locations.Count-1)
             {
                 newLoc = newLoc - Locations.Count;
+                if (newLoc == 0) Players[playerIndex].Money = Players[playerIndex].Money + 400; //Landed on Go
+                else
+                {
+                    Players[playerIndex].Money = Players[playerIndex].Money + 200; //Passed Go
+                }
             }
 
             Players[playerIndex].CurrentPosition = newLoc;
+
+
+
         }
     }
 }

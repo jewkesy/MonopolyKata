@@ -17,7 +17,6 @@ namespace MonopolyKata.Classes.Players
         public bool InJail;
 
         public int CurrentPosition;
-
-        
+        public int Money;
     }
 }
