@@ -105,8 +105,10 @@ namespace MonopolyKata.Classes.GameBoard
             Locations.Add(new Location.Location { Name = "Mayfair", Purchasable = true, TitleDeed = new TitleDeed { Cost = 400, Rent = 50, OneHouse = 200, TwoHouses = 600, ThreeHouses = 1400, FourHouses = 1700, Hotel = 2000, CostToBuild = 200 }, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Purple });
         }
 
-        public void MovePlayer(int playerIndex, int i, int i1)
+        public void MovePlayer(Player player, int i, int i1)
         {
+            int playerIndex = GetPlayerIndex(player);
+
             int currLoc = Players[playerIndex].CurrentPosition;
 
             int newLoc =  currLoc + i + i1;
@@ -122,10 +124,20 @@ namespace MonopolyKata.Classes.GameBoard
             }
 
             Players[playerIndex].CurrentPosition = newLoc;
-
-
-
         }
+
+        private int GetPlayerIndex(Player player)
+        {
+            int counter = 0;
+            foreach (var item in Players)
+            {
+                if (player.Token == item.Token) break;
+                counter++;
+            }
+            return counter;
+        }
+
+
 
         public void NextPlayerTurn()
         {

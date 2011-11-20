@@ -26,14 +26,14 @@ namespace MonopolyKataTests
         [Test]
         public void TestLandingOnGoGivesThePlayer400()
         {
-            _gameBoard.MovePlayer(0, 2, 3);
+            _gameBoard.MovePlayer(_gameBoard.Players[0], 2, 3);
             Assert.That(_gameBoard.Players[0].Money - _preMoney, Is.EqualTo(400));
         }
 
         [Test]
         public void TestPassingGoGivesThePlayer200()
         {
-            _gameBoard.MovePlayer(0, 6, 3);
+            _gameBoard.MovePlayer(_gameBoard.Players[0], 6, 3);
             Assert.That(_gameBoard.Players[0].Money - _preMoney, Is.EqualTo(200));
         }
     }

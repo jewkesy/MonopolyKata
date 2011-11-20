@@ -9,11 +9,11 @@ namespace Monopoly
 {
     class Program
     {
-        static readonly GameBoard _game = new GameBoard();
+        static readonly GameBoard Game = new GameBoard();
 
         static void Main(string[] args)
         {
-            _game.Players = new List<Player>();
+            Game.Players = new List<Player>();
 
             Console.WriteLine("Welcome to Monopoly DKJ Edition"); // Prompt
 
@@ -29,7 +29,7 @@ namespace Monopoly
 
             while (true) // Loop indefinitely
             {
-                Console.WriteLine("Enter numer of Human players [1 - " + maxPlayers + "]:");
+                Console.WriteLine("Enter number of Human players [1 - " + maxPlayers + "]:");
                 string humans = Console.ReadLine();
                 if (string.IsNullOrEmpty(humans)) continue;
 
@@ -45,7 +45,7 @@ namespace Monopoly
             {
                 while (true)
                 {
-                    Console.WriteLine("Enter numer of CPU players [0 - " + (maxPlayers - humanPlayerCount) + "]:");
+                    Console.WriteLine("Enter number of CPU players [0 - " + (maxPlayers - humanPlayerCount) + "]:");
                     string cpus = Console.ReadLine();
 
 
@@ -72,18 +72,18 @@ namespace Monopoly
 
                     Player player = new Player{ Token = (PlayerTokens.Tokens) output};
 
-                    _game.Players.Add(player);
+                    Game.Players.Add(player);
                     break;
                 }
             }
 
            
-            foreach (Player player in _game.Players)
+            foreach (Player player in Game.Players)
             {
                 player.Money = 1500;
             }
 
-            _game.CurrentPlayer = _game.Players[0];
+            Game.CurrentPlayer = Game.Players[0];
         }
 
         private static void PlayGame()
@@ -92,7 +92,7 @@ namespace Monopoly
             {
                 try
                 {
-                    Console.Write("[" + _game.CurrentPlayer.Token + " - £" + _game.CurrentPlayer.Money + "] ");
+                    Console.Write("[" + Game.CurrentPlayer.Token + " > " + Game.Locations[Game.CurrentPlayer.CurrentPosition].Name + " - £" + Game.CurrentPlayer.Money + "] ");
                     Console.WriteLine("Enter Die Values:"); // Prompt
                     string line = Console.ReadLine(); // Get string from user
                     if (string.IsNullOrEmpty(line)) continue;
@@ -108,11 +108,11 @@ namespace Monopoly
                     {
                         int die1 = Int32.Parse(line.Substring(0, 1));
                         int die2 = Int32.Parse(line.Substring(1, 1));
-                        _game.MovePlayer(0, die1, die2);
+                        Game.MovePlayer(Game.CurrentPlayer, die1, die2);
                         Console.Write("You landed on ");
-                        Console.WriteLine(_game.Locations[_game.Players[0].CurrentPosition].Name);
+                        Console.WriteLine(Game.Locations[Game.CurrentPlayer.CurrentPosition].Name);
 
-                        _game.NextPlayerTurn();
+                        Game.NextPlayerTurn();
                     }
                 }
                 catch (Exception ex)
@@ -133,7 +133,7 @@ namespace Monopoly
             PrintRow("Name", "Purchased", "Cost", "Colour");
             PrintLine();
 
-            foreach (Location location in _game.Locations.Where(location => location.Purchasable))
+            foreach (Location location in Game.Locations.Where(location => location.Purchasable))
             {
                 PrintRow(location.Name, location.Purchased.ToString(), "£" + location.TitleDeed.Cost, location.LocColour.ToString());
             }
