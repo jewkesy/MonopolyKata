@@ -8,6 +8,8 @@ namespace MonopolyKata.Classes.Players
 {
     public class Player: PlayerTokens
     {
+        public PlayerType Type;
+
         public enum PlayerType
         {
             Human,

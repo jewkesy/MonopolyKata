@@ -22,6 +22,7 @@ namespace MonopolyKata.Classes.GameBoard
         public IList<Chance> ChanceCards;
         public IList<Player> Players;
         public Player CurrentPlayer;
+        public IList<int> TokensTaken;
 
         public GameBoard()
         {
@@ -35,7 +36,6 @@ namespace MonopolyKata.Classes.GameBoard
             CommunityChestCards = new List<CommunityChest>();
 
             CommunityChestCards.Add(new CommunityChest { Title = "Advance to Go"});
-
 
             ShuffleCommunityChestCards();
         }
@@ -137,8 +137,6 @@ namespace MonopolyKata.Classes.GameBoard
             return counter;
         }
 
-
-
         public void NextPlayerTurn()
         {
             Player prevPlayer = CurrentPlayer;
@@ -162,6 +160,32 @@ namespace MonopolyKata.Classes.GameBoard
                 }
                 counter++;
             }
+        }
+
+        public void SetInitialMonies(int amount)
+        {
+            foreach(Player player in Players)
+            {
+                player.Money = amount;
+            }
+        }
+
+        public IList<PlayerTokens.Tokens> GetAvailableTokens()
+        {
+            IList<PlayerTokens.Tokens> retVal = new List<PlayerTokens.Tokens>();
+            foreach (Player player in Players)
+            {
+                
+            }
+            return retVal;
+        }
+
+        public void UpdateAvailableTokens(PlayerTokens.Tokens tokenToRemove)
+        {
+
+
+
+
         }
     }
 }

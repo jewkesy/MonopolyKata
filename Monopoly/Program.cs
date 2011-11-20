@@ -24,8 +24,8 @@ namespace Monopoly
         private static void SetUpGamePlayers()
         {
             int maxPlayers = Enum.GetValues(typeof (PlayerTokens.Tokens)).Length;
-            int humanPlayerCount;
-            int cpuPlayerCount;
+            int humanPlayerCount = 0;
+            int cpuPlayerCount = 0;
 
             while (true) // Loop indefinitely
             {
@@ -41,6 +41,25 @@ namespace Monopoly
                 break;
             }
 
+            for (int i = 1; i <= humanPlayerCount; i++)
+            {
+                while (true)
+                {
+                    Console.WriteLine(Game.GetAvailableTokens());
+                    Console.WriteLine("Player " + i + ", please select your token:");
+                    string tokenIndx = Console.ReadLine();
+                    int output;
+                    if (Int32.TryParse(tokenIndx, out output))
+                        if (output < 0 || output > 12) continue;
+
+                    Player player = new Player { Token = (PlayerTokens.Tokens)output, Type = Player.PlayerType.Human };
+
+                    Game.Players.Add(player);
+                    Game.UpdateAvailableTokens(player.Token);
+                    break;
+                }
+            }
+
             if (humanPlayerCount < maxPlayers)
             {
                 while (true)
@@ -48,41 +67,21 @@ namespace Monopoly
                     Console.WriteLine("Enter number of CPU players [0 - " + (maxPlayers - humanPlayerCount) + "]:");
                     string cpus = Console.ReadLine();
 
-
                     if (string.IsNullOrEmpty(cpus)) continue;
 
                     int output;
                     if (Int32.TryParse(cpus, out output)) if (output < 0 || output > maxPlayers) continue; //supports zero for now
-
-                    cpuPlayerCount = output;
-
+     
+                    for (int i = 1; i <= cpuPlayerCount; i++)
+                    {
+                        Player player = new Player { Token = (PlayerTokens.Tokens)output, Type = Player.PlayerType.Cpu};
+                        Game.Players.Add(player);
+                    }
                     break;
                 }
             }
 
-            for (int i = 1; i <= humanPlayerCount; i++ )
-            {
-                while (true)
-                {
-                    Console.WriteLine("Player " + i + ", please select your token:");
-                    string tokenIndx = Console.ReadLine();
-                    int output;
-                    if (Int32.TryParse(tokenIndx, out output)) 
-                        if (output < 0 || output > 12) continue;
-
-                    Player player = new Player{ Token = (PlayerTokens.Tokens) output};
-
-                    Game.Players.Add(player);
-                    break;
-                }
-            }
-
-           
-            foreach (Player player in Game.Players)
-            {
-                player.Money = 1500;
-            }
-
+            Game.SetInitialMonies(1500);
             Game.CurrentPlayer = Game.Players[0];
         }
 

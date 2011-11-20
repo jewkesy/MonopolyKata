@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MonopolyKata.Classes.GameBoard;
+using MonopolyKata.Classes.Players;
 using NUnit.Framework;
 
 namespace MonopolyKataTests
@@ -43,6 +45,16 @@ namespace MonopolyKataTests
         public void TestThatThe2PlayersCannotHaveTheSameGameToken()
         {
             
+        }
+
+        [Test]
+        public void TestThatAllPlayersStartWithTheSameAmountOfMoney()
+        {
+            GameBoard gameBoard = new GameBoard();
+            gameBoard.Players = new List<Player> { new Player { Token = PlayerTokens.Tokens.Dog }, new Player { Token = PlayerTokens.Tokens.Hat } };
+            gameBoard.SetInitialMonies(1234);
+            Assert.That(gameBoard.Players[0].Money, Is.EqualTo(1234));
+            Assert.That(gameBoard.Players[1].Money, Is.EqualTo(1234));
         }
     }
 }
