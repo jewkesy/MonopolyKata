@@ -23,12 +23,23 @@ namespace MonopolyKata.Classes.GameBoard
         public IList<Player> Players;
         public Player CurrentPlayer;
         public IList<int> TokensTaken;
+        public IList<PlayerTokens.Tokens> AvailableTokens;
 
         public GameBoard()
         {
             AssembleGameBoard();
             AssembleChanceCards();
             AssembleCommunityChestCards();
+            AssembleAvailableTokens();
+        }
+
+        private void AssembleAvailableTokens()
+        {
+            AvailableTokens = new List<PlayerTokens.Tokens>();
+            foreach (PlayerTokens.Tokens token in Enum.GetValues(typeof(PlayerTokens.Tokens)))
+            {
+                AvailableTokens.Add(token);
+            }
         }
 
         private void AssembleCommunityChestCards()
@@ -182,10 +193,7 @@ namespace MonopolyKata.Classes.GameBoard
 
         public void UpdateAvailableTokens(PlayerTokens.Tokens tokenToRemove)
         {
-
-
-
-
+            AvailableTokens.Remove(tokenToRemove);
         }
     }
 }

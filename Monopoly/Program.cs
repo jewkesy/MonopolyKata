@@ -45,14 +45,16 @@ namespace Monopoly
             {
                 while (true)
                 {
-                    Console.WriteLine(Game.GetAvailableTokens());
+                    ShowAvailableTokens();
+                    
                     Console.WriteLine("Player " + i + ", please select your token:");
                     string tokenIndx = Console.ReadLine();
+                    if (tokenIndx == "") continue;
                     int output;
                     if (Int32.TryParse(tokenIndx, out output))
-                        if (output < 0 || output > 12) continue;
+                        if (output < 0 || output > Game.AvailableTokens.Count) continue;
 
-                    Player player = new Player { Token = (PlayerTokens.Tokens)output, Type = Player.PlayerType.Human };
+                    Player player = new Player { Token = Game.AvailableTokens[output - 1] , Type = Player.PlayerType.Human };
 
                     Game.Players.Add(player);
                     Game.UpdateAvailableTokens(player.Token);
@@ -83,6 +85,17 @@ namespace Monopoly
 
             Game.SetInitialMonies(1500);
             Game.CurrentPlayer = Game.Players[0];
+        }
+
+        private static void ShowAvailableTokens()
+        {
+            int i = 1;
+            foreach (var token in Game.AvailableTokens)
+            {
+                Console.WriteLine(i + " - " + token);
+                i++;
+            }
+            
         }
 
         private static void PlayGame()

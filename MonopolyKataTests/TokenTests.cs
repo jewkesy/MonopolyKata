@@ -13,21 +13,16 @@ namespace MonopolyKataTests
         [Test]
         public void TestThatTokenIsNoLongerAvailableToOtherPlayersOnceTakenByAPlayer()
         {
-            GameBoard gameBoard = new GameBoard();
-            gameBoard.Players = new List<Player> { new Player { Token = PlayerTokens.Tokens.Dog }};
+            GameBoard gameBoard = new GameBoard { Players = new List<Player> {new Player {Token = PlayerTokens.Tokens.Dog}}};
             gameBoard.UpdateAvailableTokens(PlayerTokens.Tokens.Dog);
-
-            IList<PlayerTokens.Tokens> sut = gameBoard.GetAvailableTokens();
-            Assert.That(sut.Count, Is.EqualTo(11));
+            Assert.That(gameBoard.AvailableTokens.Count, Is.EqualTo(11));
         }
 
         [Test]
         public void TestThatAllTokensAreAvailableAtStart()
         {
             GameBoard gameBoard = new GameBoard();
-            IList<PlayerTokens.Tokens> sut = gameBoard.GetAvailableTokens();
-
-            Assert.That(sut.Count, Is.EqualTo(12));
+            Assert.That(gameBoard.AvailableTokens.Count, Is.EqualTo(12));
         }
     }
 }
