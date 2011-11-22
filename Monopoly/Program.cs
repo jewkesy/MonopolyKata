@@ -66,14 +66,16 @@ namespace Monopoly
             {
                 while (true)
                 {
-                    Console.WriteLine("Enter number of CPU players [0 - " + (maxPlayers - humanPlayerCount) + "]:");
+                    int minCpuPlayers = 0;
+                    if (humanPlayerCount <= 1) minCpuPlayers = 1;
+                    Console.WriteLine("Enter number of CPU players [" + minCpuPlayers + " - " + (maxPlayers - humanPlayerCount) + "]:");
                     string cpus = Console.ReadLine();
 
                     if (string.IsNullOrEmpty(cpus)) continue;
 
                     int output;
-                    if (Int32.TryParse(cpus, out output)) if (output < 0 || output > maxPlayers) continue; //supports zero for now
-     
+                    if (Int32.TryParse(cpus, out output)) if (output < minCpuPlayers || output > maxPlayers - humanPlayerCount) continue; //supports zero for now
+
                     for (int i = 1; i <= cpuPlayerCount; i++)
                     {
                         Player player = new Player { Token = (PlayerTokens.Tokens)output, Type = Player.PlayerType.Cpu};
