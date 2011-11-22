@@ -78,7 +78,7 @@ namespace Monopoly
 
                     for (int i = 1; i <= output; i++)
                     {
-                        Player player = new Player { Token = (PlayerTokens.Tokens)output, Type = Player.PlayerType.Cpu};
+                        Player player = new Player { Token = Game.AvailableTokens[i - 1], Type = Player.PlayerType.Cpu};
                         Game.Players.Add(player);
                     }
                     break;
@@ -110,12 +110,8 @@ namespace Monopoly
                     Console.WriteLine("Enter Die Values:"); // Prompt
                     string line = Console.ReadLine(); // Get string from user
                     if (string.IsNullOrEmpty(line)) continue;
-                    if (line.ToLower() == "exit" || line.ToLower() == "quit" || line.ToLower() == "e" || line.ToLower() == "q") break;
-                    if (line.ToLower() == "help" || line == "?") ShowHelp();
-                    if (line.ToLower() == "board" || line == "b") ShowBoard();
-                    if (line.ToLower() == "bank" || line == "£") ShowBank();
-                    if (line.ToLower() == "players" || line == "p") ShowPlayers();
-
+                    if (WantsToQuit(line)) break;
+                    ProcessInput(line);
                     if (line.Length != 2) continue;
 
                     int output;
@@ -137,6 +133,38 @@ namespace Monopoly
             }
         }
 
+        private static bool WantsToQuit(string input)
+        {
+            return input.ToLower() == "exit" || input.ToLower() == "quit" || input.ToLower() == "e" || input.ToLower() == "q";
+        }
+
+        private static void ProcessInput(string input)
+        {
+            switch (input.ToLower())
+            {
+                case "?":
+                    ShowHelp();
+                    break;
+                case "b":
+                    ShowBoard();
+                    break;
+                case "£":
+                    ShowBank();
+                    break;
+                case "p":
+                    ShowPlayers();
+                    break;
+                case "i":
+                    ShowPlayerInfo();
+                    break;
+            }
+        }
+
+        private static void ShowPlayerInfo()
+        {
+            throw new NotImplementedException();
+        }
+
         private static void ShowPlayers()
         {
             PrintLine();
@@ -149,14 +177,10 @@ namespace Monopoly
                 string turn = "";
                 string playerType = "";
                 if (player.Type == Player.PlayerType.Cpu) playerType = " [CPU]";
-
                 if (Game.CurrentPlayer.Token == player.Token) turn = "X";
-
                 if (player.InJail) locationName += "\nIn Jail";
 
                 PrintRow(player.Token.ToString() + playerType, locationName, "£" + player.Money, turn);
-       
-            
             }
             PrintLine();
         }
