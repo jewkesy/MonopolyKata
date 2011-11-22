@@ -47,8 +47,6 @@
     <Compile Include="Classes\Cards\Chance.cs" />
     <Compile Include="Classes\Cards\CommunityChest.cs" />
     <Compile Include="Classes\GameBoard\GameBoard.cs" />
-    <Compile Include="Classes\Helpers\ShuffleCards.cs" />
-    <Compile Include="Classes\Helpers\ShuffleTests.cs" />
     <Compile Include="Classes\Location\Location.cs" />
     <Compile Include="Classes\Location\LocationBase.cs" />
     <Compile Include="Classes\Location\TitleDeed.cs" />
@@ -59,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Classes\Helpers\" />
     <Folder Include="Gameplay\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
