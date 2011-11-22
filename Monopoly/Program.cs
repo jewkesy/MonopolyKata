@@ -76,7 +76,7 @@ namespace Monopoly
                     int output;
                     if (Int32.TryParse(cpus, out output)) if (output < minCpuPlayers || output > maxPlayers - humanPlayerCount) continue; //supports zero for now
 
-                    for (int i = 1; i <= cpuPlayerCount; i++)
+                    for (int i = 1; i <= output; i++)
                     {
                         Player player = new Player { Token = (PlayerTokens.Tokens)output, Type = Player.PlayerType.Cpu};
                         Game.Players.Add(player);
@@ -114,6 +114,7 @@ namespace Monopoly
                     if (line.ToLower() == "help" || line == "?") ShowHelp();
                     if (line.ToLower() == "board" || line == "b") ShowBoard();
                     if (line.ToLower() == "bank" || line == "£") ShowBank();
+                    if (line.ToLower() == "players" || line == "p") ShowPlayers();
 
                     if (line.Length != 2) continue;
 
@@ -134,6 +135,30 @@ namespace Monopoly
                     Console.WriteLine(ex.ToString());
                 }
             }
+        }
+
+        private static void ShowPlayers()
+        {
+            PrintLine();
+            PrintRow("Game Token", "Location", "Money", "Turn");
+            PrintLine();
+
+            foreach (Player player in Game.Players)
+            {
+                string locationName = Game.Locations[player.CurrentPosition].Name;
+                string turn = "";
+                string playerType = "";
+                if (player.Type == Player.PlayerType.Cpu) playerType = " [CPU]";
+
+                if (Game.CurrentPlayer.Token == player.Token) turn = "X";
+
+                if (player.InJail) locationName += "\nIn Jail";
+
+                PrintRow(player.Token.ToString() + playerType, locationName, "£" + player.Money, turn);
+       
+            
+            }
+            PrintLine();
         }
 
         private static void ShowBoard()
