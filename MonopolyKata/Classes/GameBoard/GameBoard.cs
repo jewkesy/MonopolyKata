@@ -18,12 +18,14 @@ namespace MonopolyKata.Classes.GameBoard
     public class GameBoard
     {
         public IList<Location.Location> Locations;
-        public IList<CommunityChest> CommunityChestCards;
-        public IList<Chance> ChanceCards;
+        public IList<BaseCard> CommunityChestCards;
+        public IList<BaseCard> ChanceCards;
         public IList<Player> Players;
         public Player CurrentPlayer;
         public IList<int> TokensTaken;
         public IList<PlayerTokens.Tokens> AvailableTokens;
+
+        static Random _random = new Random();
 
         public GameBoard()
         {
@@ -44,30 +46,40 @@ namespace MonopolyKata.Classes.GameBoard
 
         private void AssembleCommunityChestCards()
         {
-            CommunityChestCards = new List<CommunityChest>();
+            CommunityChestCards = new List<BaseCard>();
 
-            CommunityChestCards.Add(new CommunityChest { Title = "Advance to Go"});
+            for (int i = 1; i < 17; i++)
+            {
+                CommunityChestCards.Add(new CommunityChest {Title = i.ToString()});
+            }
 
-            ShuffleCommunityChestCards();
+            ShuffleCards<BaseCard>(CommunityChestCards);
         }
 
         private void AssembleChanceCards()
         {
-            ChanceCards = new List<Chance>();
+            ChanceCards = new List<BaseCard>();
 
-            ChanceCards.Add(new Chance { Title = "Advance to Go" });
+            for (int i = 1; i < 17; i++)
+            {
+                ChanceCards.Add(new Chance { Title = i.ToString() });
+            }
 
-            ShuffleChanceCards();
+            ShuffleCards<BaseCard>(ChanceCards);
         }
 
-        private void ShuffleCommunityChestCards()
+        private void ShuffleCards<T>(IList<BaseCard> array)
         {
-            //throw new NotImplementedException();
-        }
-
-        private void ShuffleChanceCards()
-        {
-            //throw new NotImplementedException();
+            var random = _random;
+            for (int i = array.Count; i > 1; i--)
+            {
+                // Pick random element to swap.
+                int j = random.Next(i); // 0 <= j <= i-1
+                // Swap.
+                BaseCard tmp = array[j];
+                array[j] = array[i - 1];
+                array[i - 1] = tmp;
+            }
         }
 
         private void AssembleGameBoard()
