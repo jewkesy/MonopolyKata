@@ -212,5 +212,13 @@ namespace MonopolyKata.Classes.GameBoard
         {
             return Dice.RollDice.GetRolledDiceValue();
         }
+
+        /// <summary>
+        /// Method will buy houses, etc.
+        /// </summary>
+        public void CpuTurn()
+        {
+            
+        }
     }
 }

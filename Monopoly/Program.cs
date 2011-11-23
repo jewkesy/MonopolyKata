@@ -108,20 +108,33 @@ namespace Monopoly
                 {
                     Console.Write("[" + Game.CurrentPlayer.Token + " > " + Game.Locations[Game.CurrentPlayer.CurrentPosition].Name + " - £" + Game.CurrentPlayer.Money + "] ");
                     Console.WriteLine("Press Enter to roll!"); // Prompt
-                    string line = Console.ReadLine(); // Get string from user
 
-                    if (string.IsNullOrEmpty(line))
+                    string input = "";
+                    string who = "";
+
+                    if (Game.CurrentPlayer.Type == Player.PlayerType.Cpu)
+                    {
+                        Game.CpuTurn();
+                        who = "[CPU]";
+                    }
+                    else
+                    {
+                        input = Console.ReadLine(); // Get string from user   
+                        who = "You";
+                    }
+
+                    if (string.IsNullOrEmpty(input))
                     {
                         int firstDie = Game.RollDice();
                         int secondDie = Game.RollDice();
                         Game.MovePlayer(Game.CurrentPlayer, firstDie, secondDie);
-                        Console.Write("You rolled " + firstDie + "/" + secondDie + " and landed on ");
+                        Console.Write(who + " rolled " + firstDie + "/" + secondDie + " and landed on ");
                         Console.WriteLine(Game.Locations[Game.CurrentPlayer.CurrentPosition].Name);
                         Game.NextPlayerTurn();
                     }
 
-                    if (WantsToQuit(line)) break;
-                    ProcessInput(line);
+                    if (WantsToQuit(input)) break;
+                    ProcessInput(input);
                 }
                 catch (Exception ex)
                 {
@@ -203,7 +216,10 @@ namespace Monopoly
 
         private static void ShowHelp()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("b - Show the Game Board");
+            Console.WriteLine("£ - Show the Bank");
+            Console.WriteLine("p - Show Players");
+            Console.WriteLine("i - Show your information");
         }
 
         public static bool IsNumeric(string theValue)
