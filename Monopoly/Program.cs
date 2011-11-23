@@ -107,24 +107,21 @@ namespace Monopoly
                 try
                 {
                     Console.Write("[" + Game.CurrentPlayer.Token + " > " + Game.Locations[Game.CurrentPlayer.CurrentPosition].Name + " - £" + Game.CurrentPlayer.Money + "] ");
-                    Console.WriteLine("Enter Die Values:"); // Prompt
+                    Console.WriteLine("Press Enter to roll!"); // Prompt
                     string line = Console.ReadLine(); // Get string from user
-                    if (string.IsNullOrEmpty(line)) continue;
-                    if (WantsToQuit(line)) break;
-                    ProcessInput(line);
-                    if (line.Length != 2) continue;
 
-                    int output;
-                    if (Int32.TryParse(line, out output))
+                    if (string.IsNullOrEmpty(line))
                     {
-                        int die1 = Int32.Parse(line.Substring(0, 1));
-                        int die2 = Int32.Parse(line.Substring(1, 1));
-                        Game.MovePlayer(Game.CurrentPlayer, die1, die2);
-                        Console.Write("You landed on ");
+                        int firstDie = Game.RollDice();
+                        int secondDie = Game.RollDice();
+                        Game.MovePlayer(Game.CurrentPlayer, firstDie, secondDie);
+                        Console.Write("You rolled " + firstDie + "/" + secondDie + " and landed on ");
                         Console.WriteLine(Game.Locations[Game.CurrentPlayer.CurrentPosition].Name);
-
                         Game.NextPlayerTurn();
                     }
+
+                    if (WantsToQuit(line)) break;
+                    ProcessInput(line);
                 }
                 catch (Exception ex)
                 {

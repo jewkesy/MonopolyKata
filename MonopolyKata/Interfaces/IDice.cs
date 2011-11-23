@@ -7,6 +7,6 @@ namespace MonopolyKata.Interfaces
 {
     public interface IDice
     {
-        int RollDice { get; set; }
+        
     }
 }

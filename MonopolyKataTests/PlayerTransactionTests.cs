@@ -33,7 +33,7 @@ namespace MonopolyKataTests
         [Test]
         public void TestPassingGoGivesThePlayer200()
         {
-            _gameBoard.MovePlayer(_gameBoard.Players[0], 6, 3);
+            _gameBoard.MovePlayer(_gameBoard.Players[0], 3, 6);
             Assert.That(_gameBoard.Players[0].Money - _preMoney, Is.EqualTo(200));
         }
     }

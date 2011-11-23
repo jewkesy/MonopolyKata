@@ -68,7 +68,7 @@ namespace MonopolyKata.Classes.GameBoard
             ShuffleCards<BaseCard>(ChanceCards);
         }
 
-        private void ShuffleCards<T>(IList<BaseCard> array)
+        private static void ShuffleCards<T>(IList<BaseCard> array)
         {
             var random = _random;
             for (int i = array.Count; i > 1; i--)
@@ -128,13 +128,13 @@ namespace MonopolyKata.Classes.GameBoard
             Locations.Add(new Location.Location { Name = "Mayfair", Purchasable = true, TitleDeed = new TitleDeed { Cost = 400, Rent = 50, OneHouse = 200, TwoHouses = 600, ThreeHouses = 1400, FourHouses = 1700, Hotel = 2000, CostToBuild = 200 }, LocType = LocationBase.LocationType.Street, LocColour = LocationBase.LocationColour.Purple });
         }
 
-        public void MovePlayer(Player player, int i, int i1)
+        public void MovePlayer(Player player, int firstDiceCount, int secondDiceCount)
         {
             int playerIndex = GetPlayerIndex(player);
 
             int currLoc = Players[playerIndex].CurrentPosition;
 
-            int newLoc =  currLoc + i + i1;
+            int newLoc = currLoc + firstDiceCount + secondDiceCount;
 
             if (newLoc > Locations.Count-1)
             {
@@ -206,6 +206,11 @@ namespace MonopolyKata.Classes.GameBoard
         public void UpdateAvailableTokens(PlayerTokens.Tokens tokenToRemove)
         {
             AvailableTokens.Remove(tokenToRemove);
+        }
+
+        public int RollDice()
+        {
+            return Dice.RollDice.GetRolledDiceValue();
         }
     }
 }

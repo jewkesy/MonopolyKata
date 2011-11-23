@@ -9,43 +9,22 @@ namespace MonopolyKataTests
 {
     public class DieTests
     {
-        
-        [Test]
-        [Ignore]
-        public void TestThatOnly2DieAreAllowed()
-        {
-            
-        }
-
         [Test]
         [Ignore]
         public void TestThatTheLowestPossibleTotalScoreIs2()
         {
-            
+            //MonopolyKata.Classes.Dice.RollDice mockedDice = MockRepository.GenerateMock<MonopolyKata.Classes.Dice.RollDice>();
+            //mockedDice.Expect(x => x.GetRolledDiceValue()).Return(2);
+            //mockedDice.VerifyAllExpectations();            
         }
 
         [Test]
         [Ignore]
         public void TestThatTheHighstPossibleTotalScoreIs12()
         {
-            MonopolyKata.Interfaces.IDice mockedDice = MockRepository.GenerateMock<MonopolyKata.Interfaces.IDice>();
-            mockedDice.Expect(x => x.RollDice).Return(12);
-
-            mockedDice.VerifyAllExpectations();
-        }
-
-        [Test]
-        [Ignore]
-        public void TestThatASingleDieCannotBeLowerThan1()
-        {
-
-        }
-
-        [Test]
-        [Ignore]
-        public void TestThatASingleDieCannotBeHigherThan6()
-        {
-
+            //MonopolyKata.Classes.Dice.RollDice mockedDice = MockRepository.GenerateMock<MonopolyKata.Classes.Dice.RollDice>();
+            //mockedDice.Expect(x => x.GetRolledDiceValue()).Return(12);
+            //mockedDice.VerifyAllExpectations();
         }
     }
 }
