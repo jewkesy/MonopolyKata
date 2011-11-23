@@ -128,8 +128,34 @@ namespace Monopoly
                         int firstDie = Game.RollDice();
                         int secondDie = Game.RollDice();
                         Game.MovePlayer(Game.CurrentPlayer, firstDie, secondDie);
+                        string locName = Game.Locations[Game.CurrentPlayer.CurrentPosition].Name;
+
                         Console.Write(who + " rolled " + firstDie + "/" + secondDie + " and landed on ");
-                        Console.WriteLine(Game.Locations[Game.CurrentPlayer.CurrentPosition].Name);
+                        Console.WriteLine(locName);
+
+                        if (Game.Locations[Game.CurrentPlayer.CurrentPosition].LocType == LocationBase.LocationType.Street || Game.Locations[Game.CurrentPlayer.CurrentPosition].LocType == LocationBase.LocationType.Station || Game.Locations[Game.CurrentPlayer.CurrentPosition].LocType == LocationBase.LocationType.Utility)
+                        {
+                            if (Game.Locations[Game.CurrentPlayer.CurrentPosition].Purchased == false)
+                            {
+                                int locCost = Game.Locations[Game.CurrentPlayer.CurrentPosition].TitleDeed.Cost;
+                                while (true)
+                                {
+                                    Console.Write("Do you want to purchase '" + locName + "' for " + locCost + " (Y/N)?");
+                                    string answer = Console.ReadLine();
+                                    if (string.IsNullOrEmpty(answer)) continue;
+                                    if (answer.ToLower() == "n") break;
+                                    if (answer.ToLower() == "y")
+                                    {
+                                        if (locCost > Game.CurrentPlayer.Money)
+                                        {
+                                            //show payment options
+                                        }
+                                        Game.PurchaseLocation(Game.Locations[Game.CurrentPlayer.CurrentPosition], Game.CurrentPlayer);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
                         Game.NextPlayerTurn();
                     }
 
@@ -167,7 +193,15 @@ namespace Monopoly
                 case "i":
                     ShowPlayerInfo();
                     break;
+                case "m":
+                    ShowPropertyManager();
+                    break;
             }
+        }
+
+        private static void ShowPropertyManager()
+        {
+            throw new NotImplementedException();
         }
 
         private static void ShowPlayerInfo()
@@ -220,6 +254,7 @@ namespace Monopoly
             Console.WriteLine("£ - Show the Bank");
             Console.WriteLine("p - Show Players");
             Console.WriteLine("i - Show your information");
+            Console.WriteLine("m - Manage your Properties");
         }
 
         public static bool IsNumeric(string theValue)

@@ -220,5 +220,11 @@ namespace MonopolyKata.Classes.GameBoard
         {
             
         }
+
+        public void PurchaseLocation(Location.Location location, Player player)
+        {
+            location.Purchased = true;
+            player.Money = 10000000;
+        }
     }
 }
