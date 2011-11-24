@@ -9,7 +9,15 @@ namespace MonopolyKataTests.Classes.GameBoardTests
     public class DoesOwnerHaveMonopolyTests
     {
         [Test]
-        public void DoSometests()
+        public void TestThatOwningAllPropertiesInAGroupIsMonopoly()
+        {
+
+
+            throw new NotImplementedException();
+        }
+
+        [Test]
+        public void TestThatNotOwningAllPropertiesInAGroupIsNotAMonopoly()
         {
             throw new NotImplementedException();
         }
