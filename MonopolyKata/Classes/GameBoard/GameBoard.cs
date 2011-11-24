@@ -25,7 +25,7 @@ namespace MonopolyKata.Classes.GameBoard
         public IList<int> TokensTaken;
         public IList<PlayerTokens.Tokens> AvailableTokens;
 
-        static Random _random = new Random();
+        static readonly Random Random = new Random();
 
         public GameBoard()
         {
@@ -70,7 +70,7 @@ namespace MonopolyKata.Classes.GameBoard
 
         private static void ShuffleCards<T>(IList<BaseCard> array)
         {
-            var random = _random;
+            var random = Random;
             for (int i = array.Count; i > 1; i--)
             {
                 // Pick random element to swap.
@@ -193,16 +193,6 @@ namespace MonopolyKata.Classes.GameBoard
             }
         }
 
-        public IList<PlayerTokens.Tokens> GetAvailableTokens()
-        {
-            IList<PlayerTokens.Tokens> retVal = new List<PlayerTokens.Tokens>();
-            foreach (Player player in Players)
-            {
-                
-            }
-            return retVal;
-        }
-
         public void UpdateAvailableTokens(PlayerTokens.Tokens tokenToRemove)
         {
             AvailableTokens.Remove(tokenToRemove);
@@ -231,24 +221,31 @@ namespace MonopolyKata.Classes.GameBoard
 
         public void PurchaseLocation(Location.Location location, Player player)
         {
-            if (!location.Purchased)
-            {
-                location.Purchased = true;
-                player.Money -= location.TitleDeed.Cost;
-                location.Owner = player;
-            }
+            if (location.Purchased) return;
+            location.Purchased = true;
+            player.Money -= location.TitleDeed.Cost;
+            location.Owner = player;
         }
 
         public void HandleLandOnLocation(Location.Location location, Player currentPlayer)
         {
-            if (location.Purchased)
+            if (!location.Purchased) return;
+            if (location.Owner == currentPlayer) return;
+
+            if (DoesOwnerHaveMonopoly(location))
             {
-                if (location.Owner != currentPlayer)
-                {
-                    currentPlayer.Money -= location.TitleDeed.Rent;
-                    location.Owner.Money += location.TitleDeed.Rent;
-                }
+                currentPlayer.Money -= location.TitleDeed.Monopoly;
+                location.Owner.Money += location.TitleDeed.Monopoly;
+                return;
             }
+
+            currentPlayer.Money -= location.TitleDeed.Rent;
+            location.Owner.Money += location.TitleDeed.Rent;
+        }
+
+        private bool DoesOwnerHaveMonopoly(Location.Location location)
+        {
+            return true;
         }
     }
 }

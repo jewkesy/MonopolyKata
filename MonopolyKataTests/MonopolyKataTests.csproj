@@ -48,6 +48,8 @@
   <ItemGroup>
     <Compile Include="BuildingTests.cs" />
     <Compile Include="CardTests.cs" />
+    <Compile Include="Classes\GameBoardTests\DoesOwnerHaveMonopolyTests.cs" />
+    <Compile Include="Classes\GameBoardTests\HandleLandOnLocationTests.cs" />
     <Compile Include="Classes\GameBoardTests\NormalCase.cs" />
     <Compile Include="DieTests.cs" />
     <Compile Include="GamePlayersTests.cs" />
