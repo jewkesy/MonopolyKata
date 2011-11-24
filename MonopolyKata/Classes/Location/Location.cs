@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MonopolyKata.Classes.Players;
 
 namespace MonopolyKata.Classes.Location
 {
@@ -10,5 +11,6 @@ namespace MonopolyKata.Classes.Location
         public bool Purchased;
         public int TaxPrice;
         public TitleDeed TitleDeed;
+        public Player Owner;
     }
 }

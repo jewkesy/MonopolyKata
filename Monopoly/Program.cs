@@ -114,7 +114,7 @@ namespace Monopoly
 
                     if (Game.CurrentPlayer.Type == Player.PlayerType.Cpu)
                     {
-                        Game.CpuTurn();
+                        Game.CpuPreRoll();
                         who = "[CPU]";
                     }
                     else
@@ -137,23 +137,36 @@ namespace Monopoly
                         {
                             if (Game.Locations[Game.CurrentPlayer.CurrentPosition].Purchased == false)
                             {
-                                int locCost = Game.Locations[Game.CurrentPlayer.CurrentPosition].TitleDeed.Cost;
-                                while (true)
+                                if (Game.CurrentPlayer.Type == Player.PlayerType.Cpu)
                                 {
-                                    Console.Write("Do you want to purchase '" + locName + "' for " + locCost + " (Y/N)?");
-                                    string answer = Console.ReadLine();
-                                    if (string.IsNullOrEmpty(answer)) continue;
-                                    if (answer.ToLower() == "n") break;
-                                    if (answer.ToLower() == "y")
+                                    Game.CpuPostRoll(Game.Locations[Game.CurrentPlayer.CurrentPosition], Game.CurrentPlayer);
+                                }
+                                else
+                                {
+                                    int locCost = Game.Locations[Game.CurrentPlayer.CurrentPosition].TitleDeed.Cost;
+                                    while (true)
                                     {
-                                        if (locCost > Game.CurrentPlayer.Money)
+                                        Console.Write("Do you want to purchase '" + locName + "' for " + locCost +
+                                                      " (Y/N)?");
+                                        string answer = Console.ReadLine();
+                                        if (string.IsNullOrEmpty(answer)) continue;
+                                        if (answer.ToLower() == "n") break;
+                                        if (answer.ToLower() == "y")
                                         {
-                                            //show payment options
+                                            if (locCost > Game.CurrentPlayer.Money)
+                                            {
+                                                //show payment options
+                                            }
+                                            Game.PurchaseLocation(Game.Locations[Game.CurrentPlayer.CurrentPosition],
+                                                                  Game.CurrentPlayer);
+                                            break;
                                         }
-                                        Game.PurchaseLocation(Game.Locations[Game.CurrentPlayer.CurrentPosition], Game.CurrentPlayer);
-                                        break;
                                     }
                                 }
+                            }
+                            else
+                            {
+                                Game.HandleLandOnLocation(Game.Locations[Game.CurrentPlayer.CurrentPosition], Game.CurrentPlayer);
                             }
                         }
                         Game.NextPlayerTurn();

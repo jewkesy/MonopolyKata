@@ -216,15 +216,39 @@ namespace MonopolyKata.Classes.GameBoard
         /// <summary>
         /// Method will buy houses, etc.
         /// </summary>
-        public void CpuTurn()
+        public void CpuPreRoll()
         {
             
         }
 
+        public void CpuPostRoll(Location.Location location, Player player)
+        {
+            if (player.Money > location.TitleDeed.Cost)
+            {
+                PurchaseLocation(location, player);
+            }
+        }
+
         public void PurchaseLocation(Location.Location location, Player player)
         {
-            location.Purchased = true;
-            player.Money = 10000000;
+            if (!location.Purchased)
+            {
+                location.Purchased = true;
+                player.Money -= location.TitleDeed.Cost;
+                location.Owner = player;
+            }
+        }
+
+        public void HandleLandOnLocation(Location.Location location, Player currentPlayer)
+        {
+            if (location.Purchased)
+            {
+                if (location.Owner != currentPlayer)
+                {
+                    currentPlayer.Money -= location.TitleDeed.Rent;
+                    location.Owner.Money += location.TitleDeed.Rent;
+                }
+            }
         }
     }
 }
