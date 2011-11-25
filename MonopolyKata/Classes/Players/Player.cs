@@ -20,5 +20,6 @@ namespace MonopolyKata.Classes.Players
 
         public int CurrentPosition;
         public int Money;
+        public bool Bankrupt;
     }
 }

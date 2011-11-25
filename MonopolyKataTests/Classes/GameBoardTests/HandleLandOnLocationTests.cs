@@ -7,7 +7,7 @@ namespace MonopolyKataTests.Classes.GameBoardTests
 {
     public class HandleLandOnLocationTests
     {
-        private Player _playerWhoOwns;
+        private MonopolyKata.Classes.Players.Player _playerWhoOwns;
         readonly GameBoard _gameBoard = new GameBoard();
         
         [SetUp]

@@ -165,23 +165,22 @@ namespace MonopolyKata.Classes.GameBoard
         {
             Player prevPlayer = CurrentPlayer;
 
-            int counter = 0;
+            int counter = 1;
 
             foreach (Player player in Players)
             {
-                if (player.Token == prevPlayer.Token)
-                {
-                    counter++;
-                    if (counter == Players.Count)
+                    if (player.Token == prevPlayer.Token)
                     {
-                        CurrentPlayer = Players[0];
+                        if (counter == Players.Count)
+                        {
+                            CurrentPlayer = Players[0];
+                        }
+                        else
+                        {
+                            CurrentPlayer = Players[counter];
+                        }
+                        break;
                     }
-                    else
-                    {
-                        CurrentPlayer = Players[counter];
-                    }
-                    break;
-                }
                 counter++;
             }
         }
