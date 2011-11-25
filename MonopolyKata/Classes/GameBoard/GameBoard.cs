@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MonopolyKata.Classes.Cards;
 using MonopolyKata.Classes.Location;
 using MonopolyKata.Classes.Players;
@@ -236,16 +237,24 @@ namespace MonopolyKata.Classes.GameBoard
             {
                 currentPlayer.Money -= location.TitleDeed.Monopoly;
                 location.Owner.Money += location.TitleDeed.Monopoly;
+                Console.WriteLine(location.Owner + " has MONOPOLY!");
+                Console.WriteLine(currentPlayer.Token + " owes " + location.Owner.Token + " £" + location.TitleDeed.Monopoly);
+
                 return;
             }
 
             currentPlayer.Money -= location.TitleDeed.Rent;
             location.Owner.Money += location.TitleDeed.Rent;
+            Console.WriteLine(currentPlayer.Token + " owes " + location.Owner.Token + " £" + location.TitleDeed.Rent);
         }
 
-        private bool DoesOwnerHaveMonopoly(Location.Location location)
+        public bool DoesOwnerHaveMonopoly(Location.Location location)
         {
-            return true;
+
+            IList<Location.Location> group = Locations.Where(loc => loc != location).Where(loc => loc.LocColour == location.LocColour).ToList();
+
+            return group.All(item => item.Owner == location.Owner);
+            
         }
     }
 }

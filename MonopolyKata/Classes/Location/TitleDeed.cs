@@ -3,7 +3,7 @@
     public class TitleDeed
     {
         public int Cost;
-        public int Monopoly {get { return Cost*2; }}
+        public int Monopoly {get { return Rent*2; }}
         public int Rent;
         public int OneHouse;
         public int TwoHouses;
