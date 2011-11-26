@@ -216,6 +216,7 @@ namespace MonopolyKata.Classes.GameBoard
             if (player.Money > location.TitleDeed.Cost)
             {
                 PurchaseLocation(location, player);
+                Console.WriteLine("[CPU]" + player.Token + " brought " + location.Name);
             }
         }
 

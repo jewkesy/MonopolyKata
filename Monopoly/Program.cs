@@ -224,9 +224,9 @@ namespace Monopoly
 
         private static void ShowPlayers()
         {
-            PrintLine();
-            PrintRow("Game Token", "Location", "Money", "Turn");
-            PrintLine();
+            PrintBankLine();
+            PrintBankRow("Game Token", "Location", "Money", "Turn", "In Jail");
+            PrintBankLine();
 
             foreach (Player player in Game.Players)
             {
@@ -235,11 +235,10 @@ namespace Monopoly
                 string playerType = "";
                 if (player.Type == Player.PlayerType.Cpu) playerType = " [CPU]";
                 if (Game.CurrentPlayer.Token == player.Token) turn = "X";
-                if (player.InJail) locationName += "\nIn Jail";
-
-                PrintRow(player.Token.ToString() + playerType, locationName, "£" + player.Money, turn);
+               
+                PrintBankRow(player.Token + playerType, locationName, "£" + player.Money, turn, player.InJail.ToString());
             }
-            PrintLine();
+            PrintBankLine();
         }
 
         private static void ShowBoard()
@@ -249,16 +248,26 @@ namespace Monopoly
 
         private static void ShowBank()
         {
-            PrintLine();
-            PrintRow("Name", "Purchased", "Cost", "Colour");
-            PrintLine();
+            PrintBankLine();
+            PrintBankRow("Name", "Purchased", "Cost", "Rent", "Colour");
+            PrintBankLine();
 
             foreach (Location location in Game.Locations.Where(location => location.Purchasable))
             {
-                PrintRow(location.Name, location.Purchased.ToString(), "£" + location.TitleDeed.Cost, location.LocColour.ToString());
+                if (location.Purchased)
+                {
+                    PrintBankRow(location.Name, location.Owner.Token.ToString(), "£" + location.TitleDeed.Cost,
+                             "£" + location.TitleDeed.Rent, location.LocColour.ToString());
+                }
+                else
+                {
+                    PrintBankRow(location.Name, "Bank", "£" + location.TitleDeed.Cost,
+                             "£" + location.TitleDeed.Rent, location.LocColour.ToString());
+                }
             }
 
-            PrintLine();
+
+            PrintBankLine();
         }
 
         private static void ShowHelp()
@@ -283,19 +292,20 @@ namespace Monopoly
             }
         }
 
-        static void PrintLine()
+        static void PrintBankLine()
         {
             Console.WriteLine(new string('-', 57));
         }
 
-        static void PrintRow(string column1, string column2, string column3, string column4)
+        static void PrintBankRow(string name, string owner, string cost, string rent, string colour)
         {
             Console.WriteLine(
-                string.Format("|{0}|{1}|{2}|{3}|",
-                    AlignCentre(column1, 26),
-                    AlignCentre(column2, 11),
-                    AlignCentre(column3, 6),
-                    AlignCentre(column4, 9)));
+                string.Format("|{0}|{1}|{2}|{3}|{4}|",
+                    AlignCentre(name, 26),
+                    AlignCentre(owner, 11),
+                    AlignCentre(cost, 6),
+                    AlignCentre(rent, 9),
+                    AlignCentre(colour, 9)));
         }
 
         static string AlignCentre(string text, int width)
