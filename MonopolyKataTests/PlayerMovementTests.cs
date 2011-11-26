@@ -125,5 +125,30 @@ namespace MonopolyKataTests
             Assert.That(_gameBoard.Players[1].CurrentPosition, Is.EqualTo(0));
 
         }
+
+        [Test]
+        public void TestThatRollingDoubleGivesYouAnotherGo()
+        {
+            _gameBoard.CurrentPlayer = _gameBoard.Players[0];
+            PlayerTokens.Tokens currentPlayerToken = _gameBoard.CurrentPlayer.Token;
+            _gameBoard.MovePlayer(_gameBoard.CurrentPlayer, 1, 1);
+            _gameBoard.NextPlayerTurn();
+            Assert.That(currentPlayerToken, Is.EqualTo(_gameBoard.CurrentPlayer.Token));
+        }
+
+        [Test]
+        public void TestThatRolling3DoublesPutsYouInJail()
+        {
+            _gameBoard.Players[0].CurrentPosition = 5;
+            _gameBoard.CurrentPlayer = _gameBoard.Players[0];
+            _gameBoard.MovePlayer(_gameBoard.Players[0], 1, 1);
+            _gameBoard.NextPlayerTurn();
+            _gameBoard.MovePlayer(_gameBoard.Players[0], 2, 2);
+            _gameBoard.NextPlayerTurn();
+            _gameBoard.MovePlayer(_gameBoard.Players[0], 3, 3);
+            _gameBoard.NextPlayerTurn();
+            Assert.That(_gameBoard.CurrentPlayer.CurrentPosition, Is.EqualTo(10));
+            Assert.That(_gameBoard.CurrentPlayer.InJail, Is.EqualTo(true));
+        }
     }
 }

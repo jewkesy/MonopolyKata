@@ -27,6 +27,11 @@ namespace MonopolyKata.Classes.GameBoard
         public IList<PlayerTokens.Tokens> AvailableTokens;
 
         static readonly Random Random = new Random();
+        public int FirstDie;
+        public int SecondDie;
+
+        private bool lastRollWasDouble;
+
 
         public GameBoard()
         {
@@ -146,7 +151,6 @@ namespace MonopolyKata.Classes.GameBoard
                     Players[playerIndex].Money = Players[playerIndex].Money + 200; //Passed Go
                 }
             }
-
             Players[playerIndex].CurrentPosition = newLoc;
         }
 
@@ -198,9 +202,10 @@ namespace MonopolyKata.Classes.GameBoard
             AvailableTokens.Remove(tokenToRemove);
         }
 
-        public int RollDice()
+        public void RollDice()
         {
-            return Dice.RollDice.GetRolledDiceValue();
+            FirstDie = Dice.RollDice.GetRolledDiceValue();
+            SecondDie = Dice.RollDice.GetRolledDiceValue();
         }
 
         /// <summary>

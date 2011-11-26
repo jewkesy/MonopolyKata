@@ -125,17 +125,16 @@ namespace Monopoly
 
                     if (string.IsNullOrEmpty(input))
                     {
-                        int firstDie = Game.RollDice();
-                        int secondDie = Game.RollDice();
-                        Game.MovePlayer(Game.CurrentPlayer, firstDie, secondDie);
+                        Game.RollDice();
+                        Game.MovePlayer(Game.CurrentPlayer, Game.FirstDie, Game.SecondDie);
                         string locName = Game.Locations[Game.CurrentPlayer.CurrentPosition].Name;
 
-                        Console.Write(who + " rolled " + firstDie + "/" + secondDie + " and landed on ");
+                        Console.Write(who + " rolled " + Game.FirstDie + "/" + Game.SecondDie + " and landed on ");
                         Console.WriteLine(locName);
 
                         if (Game.Locations[Game.CurrentPlayer.CurrentPosition].LocType == LocationBase.LocationType.Street || Game.Locations[Game.CurrentPlayer.CurrentPosition].LocType == LocationBase.LocationType.Station || Game.Locations[Game.CurrentPlayer.CurrentPosition].LocType == LocationBase.LocationType.Utility)
                         {
-                            if (Game.Locations[Game.CurrentPlayer.CurrentPosition].Purchased == false)
+                            if (!Game.Locations[Game.CurrentPlayer.CurrentPosition].Purchased)
                             {
                                 if (Game.CurrentPlayer.Type == Player.PlayerType.Cpu)
                                 {
@@ -146,8 +145,7 @@ namespace Monopoly
                                     int locCost = Game.Locations[Game.CurrentPlayer.CurrentPosition].TitleDeed.Cost;
                                     while (true)
                                     {
-                                        Console.Write("Do you want to purchase '" + locName + "' for " + locCost +
-                                                      " (Y/N)?");
+                                        Console.Write("Do you want to purchase '" + locName + "' for " + locCost + " (Y/N)?");
                                         string answer = Console.ReadLine();
                                         if (string.IsNullOrEmpty(answer)) continue;
                                         if (answer.ToLower() == "n") break;
