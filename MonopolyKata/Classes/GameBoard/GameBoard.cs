@@ -30,9 +30,6 @@ namespace MonopolyKata.Classes.GameBoard
         public int FirstDie;
         public int SecondDie;
 
-        private bool lastRollWasDouble;
-
-
         public GameBoard()
         {
             AssembleGameBoard();
@@ -136,22 +133,19 @@ namespace MonopolyKata.Classes.GameBoard
 
         public void MovePlayer(Player player, int firstDiceCount, int secondDiceCount)
         {
-            int playerIndex = GetPlayerIndex(player);
 
-            int currLoc = Players[playerIndex].CurrentPosition;
+            int currLoc = player.CurrentPosition;
 
             int newLoc = currLoc + firstDiceCount + secondDiceCount;
 
             if (newLoc > Locations.Count-1)
             {
                 newLoc = newLoc - Locations.Count;
-                if (newLoc == 0) Players[playerIndex].Money = Players[playerIndex].Money + 400; //Landed on Go
-                else
-                {
-                    Players[playerIndex].Money = Players[playerIndex].Money + 200; //Passed Go
-                }
+                if (newLoc == 0) player.Money += 400; //Landed on Go
+                else player.Money += 200; //Passed Go
             }
-            Players[playerIndex].CurrentPosition = newLoc;
+            player.CurrentPosition = newLoc;
+            
         }
 
         private int GetPlayerIndex(Player player)
@@ -167,6 +161,7 @@ namespace MonopolyKata.Classes.GameBoard
 
         public void NextPlayerTurn()
         {
+
             Player prevPlayer = CurrentPlayer;
 
             int counter = 1;
