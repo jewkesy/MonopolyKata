@@ -102,6 +102,7 @@ namespace Monopoly
 
         private static void PlayGame()
         {
+            int consectRolledDoubles = 0;
             while (true) // Loop indefinitely
             {
                 try
@@ -126,6 +127,30 @@ namespace Monopoly
                     if (string.IsNullOrEmpty(input))
                     {
                         Game.RollDice();
+                        
+                        if (Game.CurrentPlayer.InJail)
+                        {
+                            Game.RollOutOfJail(Game.CurrentPlayer);
+                            continue;
+                        }
+
+                        if (Game.FirstDie == Game.SecondDie)
+                        {
+                            consectRolledDoubles++;
+                            if (consectRolledDoubles == 3)
+                            {
+                                Console.WriteLine("3 doubles in a row put you in Jail");
+                                consectRolledDoubles = 0;
+                                Game.SendPlayerToJail(Game.CurrentPlayer);
+                                Game.NextPlayerTurn();
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            consectRolledDoubles = 0;
+                        }
+
                         Game.MovePlayer(Game.CurrentPlayer, Game.FirstDie, Game.SecondDie);
                         string locName = Game.Locations[Game.CurrentPlayer.CurrentPosition].Name;
 
@@ -166,6 +191,11 @@ namespace Monopoly
                             {
                                 Game.HandleLandOnLocation(Game.Locations[Game.CurrentPlayer.CurrentPosition], Game.CurrentPlayer);
                             }
+                        }
+                        if (Game.FirstDie == Game.SecondDie)
+                        {
+                            
+                            continue;
                         }
                         Game.NextPlayerTurn();
                     }

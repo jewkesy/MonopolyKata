@@ -52,6 +52,7 @@
     <Compile Include="Classes\GameBoardTests\HandleLandOnLocationTests.cs" />
     <Compile Include="Classes\GameBoardTests\NormalCase.cs" />
     <Compile Include="Classes\PlayerTests\BankruptTests.cs" />
+    <Compile Include="Classes\PlayerTests\JailTests.cs" />
     <Compile Include="DieTests.cs" />
     <Compile Include="GamePlayersTests.cs" />
     <Compile Include="GameRoundsTests.cs" />

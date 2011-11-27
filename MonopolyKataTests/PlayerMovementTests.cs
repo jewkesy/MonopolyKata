@@ -14,7 +14,6 @@ namespace MonopolyKataTests
         //http://schuchert.wikispaces.com/Monopoly%28r%29+Release+1+User+Stories
         //As a player, I can take a turn so that I can move around the board.
 
-        
         readonly GameBoard _gameBoard = new GameBoard();
 
         [SetUp]
@@ -54,16 +53,6 @@ namespace MonopolyKataTests
             _gameBoard.MovePlayer(_gameBoard.Players[0], 6, 6);
             Assert.That(_gameBoard.Players[0].CurrentPosition, Is.EqualTo(7));
             Assert.That(_gameBoard.CurrentPlayer.Token, Is.EqualTo(PlayerTokens.Tokens.Dog));
-        }
-
-        [Test]
-        public void TestThatRolling3ConsectutiveDoublesPutsPlayerInJail()
-        {
-            _gameBoard.Players[0].CurrentPosition = 0;
-            _gameBoard.MovePlayer(_gameBoard.Players[0], 6, 6);
-            _gameBoard.MovePlayer(_gameBoard.Players[0], 3, 3);
-            _gameBoard.MovePlayer(_gameBoard.Players[0], 1, 1);
-            Assert.That(_gameBoard.Players[0].CurrentPosition, Is.EqualTo(10));
         }
 
         [Test]
@@ -141,12 +130,12 @@ namespace MonopolyKataTests
         {
             _gameBoard.Players[0].CurrentPosition = 5;
             _gameBoard.CurrentPlayer = _gameBoard.Players[0];
-            _gameBoard.MovePlayer(_gameBoard.Players[0], 1, 1);
+            _gameBoard.MovePlayer(_gameBoard.CurrentPlayer, 1, 1);
             _gameBoard.NextPlayerTurn();
-            _gameBoard.MovePlayer(_gameBoard.Players[0], 2, 2);
+            _gameBoard.MovePlayer(_gameBoard.CurrentPlayer, 2, 2);
             _gameBoard.NextPlayerTurn();
-            _gameBoard.MovePlayer(_gameBoard.Players[0], 3, 3);
-            _gameBoard.NextPlayerTurn();
+            _gameBoard.MovePlayer(_gameBoard.CurrentPlayer, 3, 3);
+            _gameBoard.SendPlayerToJail(_gameBoard.CurrentPlayer);
             Assert.That(_gameBoard.CurrentPlayer.CurrentPosition, Is.EqualTo(10));
             Assert.That(_gameBoard.CurrentPlayer.InJail, Is.EqualTo(true));
         }

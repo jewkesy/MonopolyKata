@@ -133,7 +133,6 @@ namespace MonopolyKata.Classes.GameBoard
 
         public void MovePlayer(Player player, int firstDiceCount, int secondDiceCount)
         {
-
             int currLoc = player.CurrentPosition;
 
             int newLoc = currLoc + firstDiceCount + secondDiceCount;
@@ -145,7 +144,6 @@ namespace MonopolyKata.Classes.GameBoard
                 else player.Money += 200; //Passed Go
             }
             player.CurrentPosition = newLoc;
-            
         }
 
         private int GetPlayerIndex(Player player)
@@ -255,6 +253,37 @@ namespace MonopolyKata.Classes.GameBoard
 
             return group.All(item => item.Owner == location.Owner);
             
+        }
+
+        public void SendPlayerToJail(Player player)
+        {
+            player.InJail = true;
+            player.CurrentPosition = 10;
+            player.JailRolls = 0;
+        }
+
+        public void RollOutOfJail(Player currentPlayer)
+        {
+            currentPlayer.JailRolls++;
+            if (FirstDie == SecondDie)
+            {
+                ResetPlayerJailStatus(currentPlayer);
+                currentPlayer.CurrentPosition = 10 + FirstDie + SecondDie;
+            }
+
+
+            if (currentPlayer.JailRolls > 2)
+            {
+                ResetPlayerJailStatus(currentPlayer);
+                currentPlayer.Money -= 50;
+                currentPlayer.CurrentPosition = 10 + FirstDie + SecondDie;
+            }
+        }
+
+        private static void ResetPlayerJailStatus(Player currentPlayer)
+        {
+            currentPlayer.InJail = false;
+            currentPlayer.JailRolls = 0;
         }
     }
 }
